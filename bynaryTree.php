@@ -21,25 +21,6 @@
   $sql .= ",LENGTH(group_path) - LENGTH(REPLACE(group_path,'#','')) as depth ";
   $sql .= ",SUBSTR(group_lr_path,(LENGTH(group_lr_path)),1) as lr ";
   $sql .= "FROM ";
-  $sql .= "( ";
-  $sql .= "SELECT ";
-  $sql .= "main_no ";
-  $sql .= ",GROUP_CONCAT(path ORDER BY depth_slide separator '#') AS group_path ";
-  $sql .= ",GROUP_CONCAT(lr_path ORDER BY depth_slide separator '#') AS group_lr_path ";
-  $sql .= "FROM ";
-  $sql .= "binary_map ";
-  $sql .= "GROUP BY ";
-  $sql .= "main_no ";
-  $sql .= ") a ";
-  $sql .= "WHERE group_path LIKE CONCAT('%'," . $baseNo . ",'%') ";
-  $sql .= "ORDER BY lr asc, depth asc ";
-  
-  $sql = "SELECT ";
-  $sql .= "a.* ";
-  $sql .= ",b.parent ";
-  $sql .= ",LENGTH(group_path) - LENGTH(REPLACE(group_path,'#','')) as depth ";
-  $sql .= ",SUBSTR(group_lr_path,(LENGTH(group_lr_path)),1) as lr ";
-  $sql .= "FROM ";
   $sql .= "group_binary_map a ";
   $sql .= "LEFT OUTER JOIN ";
   $sql .= "( ";
